@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LOGIN</title>
+    <!-- bootstrap and css -->
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'login_register/css/bootstrap.min.css' %}">
+</head>
+<body>
+    <div class="container">
+        <div class="row d-flex justify-content-center">
+            <div class="col-6 bg-light shadow-lg p-3 mb-5 bg-white rounded border border-5 border-end-0 border-bottom-0 border-start-0 border-warning">
+                <!-- title -->
+                <h1 class="text-center mb-5"> LOGIN </h1>
+                <form method="post" action="{% url 'loginform' %}">
+                    {% csrf_token %}
+                    {% if messages %}
+                        {% for message in messages %}
+                            <div class="alert alert-danger">{{ message }}</div>
+                        {% endfor %}
+                    {% endif %}
+                    <!-- username -->
+                    <div class="input-group">
+                        <div class="input-group me-4">
+                            <h5>User Name:</h5>
+                        </div>
+                        <input id="username" type="text" class="form-control border-2 border-success" placeholder="User Name" name="username">
+                    </div>
+                    <div class="text-danger mb-3 " id="username-valid"></div>
+
+                    <!-- password -->
+                    <div class="input-group">
+                        <div class="input-group me-4">
+                            <h5>Password:</h5>
+                        </div>
+                        <input id="password" type="password" class="form-control border-2 border-success" placeholder="Password" name="password">
+                    </div>
+                    <div class="text-danger mb-3 " id="password-valid"></div>
+
+                    <!-- submit button -->
+                    <button type="submit" class="btn btn-warning">Login</button>
+                    <br><br>
+                    <!-- links to other pages -->
+                    <a href="{% url 'registrationform' %}">
+                        <button type="button" class="btn btn-primary">Register</button>
+                    </a>
+                    <a href="{% url 'home' %}">
+                        <button type="button" class="btn btn-danger">Home</button>
+                    </a>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
