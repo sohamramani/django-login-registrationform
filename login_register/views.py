@@ -122,6 +122,7 @@ def loginform(request):
         return redirect('home')
     
     if request.method == 'POST':
+        import pdb
         username = request.POST.get('username')
         password = request.POST.get('password')
         user = authenticate(request, username=username, password=password)
@@ -141,6 +142,7 @@ def resetpassword(request):
             confirm_password = request.POST.get('confirm_password')
             password_pattern = r"/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/"
             user = request.user
+            pdb.set_trace()  
             if user.check_password(old_password):
                 if old_password != new_password:
                     if new_password == confirm_password:
@@ -172,11 +174,13 @@ def profile(request):
         user = request.user
         userprofile = UserProfile.objects.get(user=user)
         age = UserProfile.get_age(userprofile)
+        breakpoint() 
         context = {
             'user': user,
             'userprofile': userprofile,
             'age': age,
         }
+        import debug_toolbar
         return render(request, 'login_register/profile.html', context)
     else:
         return redirect('loginform')
