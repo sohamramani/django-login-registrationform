@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>REGISTRATION FORM</title>
+    <!-- bootstrap and css -->
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'login_register/css/bootstrap.min.css' %}">
+
+</head>
+<body>
+    <div class="container registrationform">
+        <div class="row d-flex justify-content-center">
+            <div class="col-6  bg-light shadow-lg p-3 mb-5 bg-white rounded border border-5 border-end-0 border-bottom-0 border-start-0 border-warning">
+                <!-- title -->
+                <h1 class="text-center mb-5">REGISTRATION FORM</h1>
+                <form method="post" action="{% url 'registrationform' %}" enctype="multipart/form-data" id="registration-form"> 
+                    {% csrf_token %}
+                    <!-- username -->
+                    <div class="input-group">
+                        <div class="input-group me-4">
+                            <h5>User Name:</h5>
+                        </div>
+                        <input id="username" type="text" class="form-control border-2 border-success" placeholder="User Name" name="username">
+                    </div>
+                    <div class="text-danger mb-3 " id="username-valid"></div>
+
+                    <!-- firstname & lastname -->
+                    <div class="row justify-content-between">
+                        <div class="row col-lg">
+                            <div class=" col-md-6 input-group ">
+                                <div class="input-group">
+                                    <h5>First Name: </h5>
+                                </div>
+                                <input id="fname" type="text" class="form-control border-2 border-success" placeholder="First name" name="fname">
+                            </div>
+                            <div class="text-danger mb-4 " id="fname-valid"></div>
+                        </div>
+                        <div class="row col-lg">
+                            <div class="col-md-6 input-group ">
+                                <div class="input-group">
+                                    <h5>Last Name: </h5>
+                                </div>
+                                <input id="lname" type="text" class="form-control border-2 border-success" placeholder="Last name" name="lname">
+                            </div>
+                            <div class="text-danger mb-4 " id="lname-valid"></div>
+                        </div>
+                    </div>
+
+                    <!-- email -->
+                    <div class="input-group">
+                        <div class="input-group me-4">
+                            <h5>Email Address:</h5>
+                        </div>
+                        <input id="email" type="email" class="form-control border-2 border-success" placeholder="Email" name="email">
+                    </div>
+                    <div class="text-danger mb-3 " id="email-valid"></div>
+
+                    <!-- password -->
+                    <div class="input-group">
+                        <div class="input-group me-4">
+                            <h5>Password:</h5>
+                        </div>
+                        <input id="pass" autocomplete="on" type="password" name="password" class="form-control border-2 border-success" placeholder="Password">
+                    </div>
+                    <div class="text-danger mb-4 " id="password-valid"></div>
+
+                    <!-- re-pass -->
+                    <div class="input-group ">
+                        <div class="input-group me-4">
+                            <h5>Confirm Password:</h5>
+                        </div>
+                        <input id="confpass" autocomplete="on" type="password" name="confpass" class="form-control border-2 border-success" placeholder="Confirm password">
+                    </div>
+                    <div class="text-danger mb-3" id="re-pass-valid"></div>
+
+                    <!-- gender -->
+                    <div class="input-group ">
+                        <h5 class="">Gender:</h5>
+                        {% for value, text in gender.items %}
+                            <label>
+                                <input class="form-check-input gender ms-2 border-2 border-success" name="gender" type="radio" value="{{ value }}">
+                                {{ text }}
+                            </label><br>
+                        {% endfor %}
+                    </div>
+                    <div class="text-danger mb-3" id="gender-valid"></div>
+
+                    <!-- birth date -->
+                    <div class="input-group row">
+                        <h5>Birth Date:</h5>
+                        <input type="date" class="form-control border-2 border-success ms-3" id="birthdate" placeholder="Birth date" name="birth_date">
+                        <div class="text-danger mb-3" id="birthdate-valid"></div>
+                    </div>
+
+                    {% load i18n %}
+                    {% get_available_languages as languages %}
+                    <!-- country -->
+                    <div class="input-group select row">
+                        <h5>Country:</h5>
+                        <select class="form-select border-2 border-success ms-3" id="country" aria-label="Default select example" name="country">
+                            <option class="form-select border-2 border-success ms-3" id="country" aria-label="Default select example" value="" selected disabled>{% translate "Select a country" %}</option>
+                            {% for country in countries %}
+                                <option value="{{ country.code }}">{{ country.name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="text-danger mb-3" id="country-valid"></div>
+
+                    <!-- profile picture -->
+                    <div class="input-group row">
+                        <h5>Profile Picture:</h5>
+                        <input type="file" class="form-control border-2 border-success ms-3" id="profile" placeholder="Profile picture" name="profile_picture">
+                        <div class="text-danger mb-3" id="profile-valid"></div>
+                    </div>
+
+                    <!-- hobbies -->
+                    <h5>Hobbies:</h5>
+                    <div class="form-check">
+                        {% for value, text in hobbies.items %}
+                            <label>
+                                <input class="form-check-input border-2 border-success" type="checkbox" name="hobbies" value="{{ value }}">
+                                {{ text }}
+                            </label><br>
+                        {% endfor %}
+                    </div>
+                    <div class="text-danger mb-3" id="hobbies-valid"></div>
+
+                    <!-- mobile_number -->
+                    <div class="input-group row">
+                        <h5>Mobile Number:</h5>
+                        <input type="tel" class="form-control border-2 border-success ms-3" id="mobile" placeholder="Mobile number" name="mobile_number">
+                        <div class="text-danger mb-3" id="mobile-valid"></div>
+                    </div>
+
+                    <!-- Register -->
+                    <button type="submit" id="register" class="btn btn-warning w-25 p-3" value="OK">Register</button>
+                    <a href="{% url 'home' %}">
+                        <button type="button" class="btn btn-danger w-25 p-3">Home</button>
+                    </a>
+                </form>
+            </div>
+        </div>  
+    </div>
+    
+    <!-- javascript -->
+    {% load static %}
+    <script src="{% static 'login_register/js/script.js' %}"></script>
+</body>
+</html>
