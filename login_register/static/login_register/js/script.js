@@ -1,5 +1,6 @@
 //username
 function username_validation() {
+    console.log("Hello, World!");
     let username = document.getElementById("username").value
     const username_pattern = /^[a-zA-Z]+$/;
     if(username_pattern.test(username)){
@@ -10,6 +11,7 @@ function username_validation() {
 }
 // firstname
 function firstname_validation() {
+    debugger;
     let firstname = document.getElementById("fname").value
     const firstname_pattern = /^[a-zA-Z]+$/;
     if(firstname_pattern.test(firstname)){
@@ -82,6 +84,7 @@ function country_validation(){
     if(country == "country"){
         document.getElementById("country-valid").innerHTML = "please select country"
     }else{
+        console.log("Hello, World!");
         document.getElementById("country-valid").innerHTML = ""
     }
 }
@@ -107,6 +110,7 @@ function hobbies_validation(){
 // phone number
 function phone_validation(){
     let phone = document.getElementById("mobile").value
+    console.log("Hello, World!");
     const phone_pattern = /^\d{10}$/;
     if(phone_pattern.test(phone)){
         document.getElementById("mobile-valid").innerHTML = ""
@@ -119,6 +123,7 @@ function phone_validation(){
 const element = document.getElementById("register");
 element.addEventListener("click", function(e) {
     username_validation()
+    console.log("Hello, World!");
     email_validation ();
     password_validation();
     re_password_validation();
